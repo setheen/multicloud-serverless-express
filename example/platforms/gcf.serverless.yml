@@ -1,0 +1,26 @@
+service: ${file(./package.json):name} # NOTE: Don't put the word "google" in here
+
+provider:
+  name: google
+  runtime: nodejs
+  project: project-3711673571002266249 # NOTE: Enter your own project ID here
+  credentials: ${file(./platforms/platform.js):getUserHome}/.gcloud/westbaydev-serviceaccount-editor.json # Note: Enter your own service account file here
+
+plugins:
+  - serverless-google-cloudfunctions
+
+package:
+  exclude:
+    - .gitignore
+    - package.json
+    - .git/**
+
+functions:
+  first:
+    handler: test
+    memorySize: 128
+    events:
+      - http: path
+        path: test
+        method: get
+        cors: true

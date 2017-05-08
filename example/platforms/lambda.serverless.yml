@@ -1,0 +1,54 @@
+service: ${file(./package.json):name} # NOTE: Don't put the word "google" in here
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  profile: serverless-admin
+  stage: dev
+  vpc:
+    securityGroupIds:
+      - sg-3cda0640
+    subnetIds:
+      - subnet-34bac119
+  role: arn:aws:iam::862237753201:role/mock-environment-lambda
+  memorySize: 128
+
+
+# needs more granular excluding in production as only the serverless provider npm
+# package should be excluded (and not the whole node_modules directory)
+package:
+  exclude:
+    - .gitignore
+    - package.json
+    - .git/**
+
+functions:
+  first:
+    handler: index.test
+    memorySize: 128
+    events:
+      - http:
+          path: /{fullPath+}
+          method: get
+          cors: true
+  
+  # NOTE: the following uses an "event" event (pubSub event in this case).
+  # Please create the corresponding resources in the Google Cloud
+  # before deploying this service through Serverless
+  
+  #second:
+  #  handler: event
+  #  events:
+  #    - event:
+  #        eventType: providers/cloud.pubsub/eventTypes/topic.publish
+  #        resource: projects/*/topics/my-topic
+
+# you can define resources, templates etc. the same way you would in a
+# Google Cloud deployment configuration
+# resources:
+#  resources:
+#    - type: storage.v1.bucket
+#      name: new-westbaydev-functions
+#  imports:
+#    - path: my_template.jinja
+      

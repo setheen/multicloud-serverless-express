@@ -1,0 +1,19 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "cd .. && tsc && cd example && rm ./dist -rf && cp -rf ../dist dist",
+    "deploy-gcf": "npm run build && cp ./platforms/gcf.serverless.yml ./serverless.yml && serverless deploy && rm ./serverless.yml",
+    "remove-gcf": "cp ./platforms/gcf.serverless.yml ./serverless.yml && serverless remove && rm ./serverless.yml",
+    "deploy-lambda": "npm run build && cp ./platforms/lambda.serverless.yml ./serverless.yml && serverless deploy && rm ./serverless.yml",
+    "remove-lambda": "cp ./platforms/lambda.serverless.yml ./serverless.yml && serverless remove && rm ./serverless.yml"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "cors": "^2.8.3",
+    "express": "^4.15.2",
+    "serverless-google-cloudfunctions": "^1.0.0"
+  }
+}
