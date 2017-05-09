@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const CloudBoiler = require("./dist/index.js");
+const cloudBoiler = require("./dist/index.js").default;
 
 app.get("/test1", (req, res) =>
 {
@@ -12,6 +12,6 @@ app.get("/test2/deeper/:part", (req, res) =>
     res.send(`You sent ${req.params.part}`);
 });
 
-CloudBoiler.default.ignite(app);
+cloudBoiler.ignite(app);
 
-exports.test = (firstParam, secondParam) => CloudBoiler.default.boil(firstParam, secondParam);
+exports.test = (firstParam, secondParam) => cloudBoiler.boil(firstParam, secondParam);

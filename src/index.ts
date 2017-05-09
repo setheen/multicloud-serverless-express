@@ -16,6 +16,7 @@ class CloudBoiler
     {
         this.functionSpace =  process.env.LAMBDA_TASK_ROOT ? functionSpace.lambda : functionSpace.gcf;
     }
+    
     static getInstance()
     {
         if (!CloudBoiler.instance)
@@ -91,6 +92,5 @@ class CloudBoiler
 }
 
 enum functionSpace { lambda, gcf };
-
 
 export default CloudBoiler.getInstance();
