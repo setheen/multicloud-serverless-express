@@ -1,5 +1,5 @@
 # multicloud-serverless-express
-Boilerplate javascript to wrap AWS Lambda and Google Cloud Functions into the ExpressJS framework when using the serverless framework.  Empowers CRUD operations between clouds with a one-function-per-resource approach.
+Boilerplate javascript to wrap AWS Lambda and Google Cloud Functions into the [ExpressJS](https://expressjs.com/) framework when using the [serverless framework](https://serverless.com/).  Empowers CRUD operations between clouds with a one-function-per-resource approach.
 
 ## Example
 With API Gateway and Lambda, you'd typically write a handler as such
