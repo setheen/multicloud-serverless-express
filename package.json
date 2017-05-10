@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Boilerplate javascript to wrap AWS Lambda and Google Cloud Functions into the ExpressJS framework",
   "main": "dist/index.js",
+  "typings": "src/index.ts",
   "repository": "https://github.com/setheen/multicloud-serverless-express.git",
   "author": "setheen <andywins@live.com>",
   "license": "MIT",
