@@ -20,7 +20,8 @@ class LambdaBoiler {
             const options = {};
             options.headers = this.event.headers;
             options.method = this.event.httpMethod;
-            options.path = url.format({ pathname: this.event.path, query: this.event.queryStringParameters });
+            const pathname = this.event.path.replace(/\/[a-zA-Z0-9]*/, ""); // Strip resource name off the path
+            options.path = url.format({ pathname, query: this.event.queryStringParameters });
             options.socketPath = this.server.socketPath;
             return options;
         });
