@@ -27,9 +27,17 @@ class CloudBoiler
     public ignite(app: Express)
     {
         this.server = http.createServer(app);
-        this.server.on("error", err => { console.error("CloudBoiler couldn't create http server", err); ++this.socketSuffix; this.server.close(); })
+        this.server.on("error", err => { console.error("CloudBoiler couldn't create http server", err); ++this.socketSuffix; this.server.close(); this.retryConnection(app); })
         .on("listening", () => { console.log("CloudBoiler is now listening"); (this.server as any)._isListening = true; })
         .on("close", () => { console.log("CloudBoiler is closed"); (this.server as any)._isListening = false; });
+    }
+
+    private retryConnection(app: Express)
+    {
+        // Retry sockets up to 20 times
+        console.log(`Attempting to ignite app using socket ${this.socketSuffix}`);
+        if (this.socketSuffix < 20)
+            this.ignite(app);
     }
 
     public boil(firstParam: any, secondParam: any)
